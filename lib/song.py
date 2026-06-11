@@ -5,7 +5,7 @@ class Song:
     genres = []
     artists = []
     genre_count = {}
-    artist_count = {}
+    artist_count = {}  # no 's' — must match exactly
 
     def __init__(self, name, artist, genre):
         self.name = name
@@ -16,8 +16,16 @@ class Song:
         Song.add_to_genres(genre)
         Song.add_to_artists(artist)
         Song.add_to_genre_count(genre)
-        Song.add_to_artists_count(artist)
+        Song.add_to_artist_count(artist)
 
+    # --- Reset method so tests don't bleed into each other ---
+    @classmethod
+    def reset(cls):
+        cls.count = 0
+        cls.genres = []
+        cls.artists = []
+        cls.genre_count = {}
+        cls.artist_count = {}
 
     @classmethod
     def add_song_to_count(cls):
@@ -47,6 +55,7 @@ class Song:
         else:
             cls.artist_count[artist] = 1
 
+
 s1 = Song("Halo", "Beyonce", "R&B")
 s2 = Song("Crazy in Love", "Beyonce", "R&B")
 s3 = Song("HUMBLE.", "Kendrick Lamar", "Rap")
@@ -57,4 +66,4 @@ print(Song.count)          # 5
 print(Song.genres)         # ['R&B', 'Rap', 'Rock']
 print(Song.artists)        # ['Beyonce', 'Kendrick Lamar', 'Queen']
 print(Song.genre_count)    # {'R&B': 2, 'Rap': 2, 'Rock': 1}
-print(Song.artist_count)  # {'Beyonce': 2, 'Kendrick Lamar': 2, 'Queen': 1}
+print(Song.artist_count)   # {'Beyonce': 2, 'Kendrick Lamar': 2, 'Queen': 1}
